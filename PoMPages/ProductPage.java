@@ -20,12 +20,6 @@ public class ProductPage {
     @CacheLookup
     WebElement logoutButton;
 
-    @FindBy(how = How.XPATH, using = "//button[@id='add-to-cart-sauce-labs-bike-light']//self::button")
-    WebElement sauceLabsBikeLight;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"shopping_cart_container\"]//self::div")
-    WebElement shoppingContainer;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"item_0_title_link\"]/div")
-    WebElement shoppingContainerResult;
 
     WaitForElements wait;
 
@@ -46,16 +40,7 @@ public class ProductPage {
         Assert.assertEquals("https://www.saucedemo.com/", driver.getCurrentUrl());
     }
 
-    public void addProduct() {
-        wait.customWaitForElement(sauceLabsBikeLight, 2);
-        sauceLabsBikeLight.click();
-    }
-
-    public void enterInBasket() {
-        wait.customWaitForElement(shoppingContainer, 2);
-        shoppingContainer.click();
-        Assert.assertEquals("Sauce Labs Bike Light", shoppingContainerResult.getText());
-    }
+   
 
 
 }
