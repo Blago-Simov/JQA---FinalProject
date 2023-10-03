@@ -3,7 +3,7 @@ package Steps;
 
 import Hooks.StepsHooks;
 import PomPages.LoginPage;
-import PomPages.ProductPage;
+import PomPages.MainPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
@@ -15,7 +15,7 @@ public class LoginSteps {
 
     LoginPage loginPage;
 
-    ProductPage productPage;
+    MainPage productPage;
 
     StepsHooks stepsHooks;
 
@@ -52,7 +52,7 @@ public class LoginSteps {
 
     @When("user clicks on logout button")
     public void userClicksOnLogoutButton() {
-        productPage = new ProductPage(stepsHooks.getDriver());
+        productPage = new MainPage(stepsHooks.getDriver());
         productPage.clickOnBurgerButton();
 
     }
@@ -76,6 +76,26 @@ public class LoginSteps {
     }
 
 
+    @And("user clicks on button add to cart")
+    public void userClicksOnButtonAddToCart() {
+        productPage = new MainPage(stepsHooks.getDriver());
+        productPage.addToCart();
+    }
+    @Then("user is redirected to shopping basket")
+    public void userIsRedirectedToShoppingBasket() {
+        productPage.clickOnShoppingCart();
+    }
+    @And("user can see that product have been added to shopping basket")
+    public void userCanSeeThatProductHasBeenAddedToShoppingBasket() {
+
+        Assert.assertEquals("1", productPage.getShoppingCartQuantity());
+        Assert.assertEquals("Sauce Labs Backpack", productPage.getShoppingCartInventoryName());
+
+        productPage.clickOnRemoveItemButton();
+        productPage.clickOnContinueShoppingButton();
+
+
+    }
     @After
     public void CloseDriver() {
         stepsHooks.CloseDriver();
@@ -83,3 +103,4 @@ public class LoginSteps {
 
 
 }
+  
