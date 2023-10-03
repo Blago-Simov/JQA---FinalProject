@@ -1,4 +1,4 @@
-Feature: Check login and main page functionality
+Feature: Check login  and main page functionality
 
   @smoke
   Scenario Outline: The user can log in with valid credentials
@@ -37,3 +37,18 @@ Feature: Check login and main page functionality
     Examples:
       | username | password |
       | 1234     | wasd     |
+
+  @sanity
+    Scenario Outline:Successfully adding product in shopping basket
+
+    Given user has been on login page
+    When user enters <username> and <password>
+    And user clicks on login
+    Then user is redirected to main page
+    When user clicks on button add to cart
+    Then  user is redirected to shopping basket
+    And user can see that product have been added to shopping basket
+
+    Examples:
+      | username      | password     |
+      | standard_user | secret_sauce |
