@@ -52,3 +52,29 @@ Feature: Check login  and main page functionality
     Examples:
       | username      | password     |
       | standard_user | secret_sauce |
+
+    @smoke
+    Scenario Outline: The user cannot log in as a locked_out_user
+      Given user has been on login page
+      When user enters <username> and <password>
+      And user clicks on login
+      Then message "Sorry, this user has been locked out."appears
+
+      Examples:
+        | username        | password     |
+        | locked_out_user | secret_sauce |
+
+    @smoke
+    Scenario Outline: Successfully load about page
+
+    Given user has been on login page
+    When user enters <username> and <password>
+    And user clicks on login
+    Then user is redirected to main page
+    When user clicks on about button
+    Then user is redirected to about page
+
+
+    Examples:
+      | username      | password     |
+      | standard_user | secret_sauce |
