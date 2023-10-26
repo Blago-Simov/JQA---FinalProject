@@ -17,6 +17,7 @@ public class LoginSteps {
 
     MainPage productPage;
 
+
     StepsHooks stepsHooks;
 
     @Before
@@ -81,10 +82,12 @@ public class LoginSteps {
         productPage = new MainPage(stepsHooks.getDriver());
         productPage.addToCart();
     }
+
     @Then("user is redirected to shopping basket")
     public void userIsRedirectedToShoppingBasket() {
         productPage.clickOnShoppingCart();
     }
+
     @And("user can see that product have been added to shopping basket")
     public void userCanSeeThatProductHasBeenAddedToShoppingBasket() {
 
@@ -94,8 +97,27 @@ public class LoginSteps {
         productPage.clickOnRemoveItemButton();
         productPage.clickOnContinueShoppingButton();
 
+    }
+
+    @Then("message \"Sorry, this user has been locked out.\"appears")
+    public void messageThatUserHasBeenLockedOut() {
+        Assert.assertEquals
+                ("Epic sadface: Sorry, this user has been locked out.", loginPage.getErrorMessage());
+    }
+
+    @When("user clicks on about button")
+    public void userClicksOnAboutButton() {
+        productPage = new MainPage(stepsHooks.getDriver());
+        productPage.clickOnBurgerButton();
 
     }
+
+    @Then("user is redirected to about page")
+    public void userIsRedirectedToAboutPage()  {
+        productPage.loadAboutPage();
+    }
+
+
     @After
     public void CloseDriver() {
         stepsHooks.CloseDriver();
@@ -103,4 +125,3 @@ public class LoginSteps {
 
 
 }
-  
